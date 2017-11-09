@@ -13,5 +13,28 @@
     "jwks-rsa": "^1.2.1",
     "mongoose": "^4.13.0",
     "morgan": "^1.9.0"
+  },
+  "scripts": {
+    "start": "node ./src/app.js",
+    "test": "jest",
+    "precommit": "lint-staged",
+    "pretty": "prettier src/**/*.js --single-quote --write",
+    "dev": "docker-compose -f ./run.yml up",
+    "du": "docker-compose -f ./run.yml up -d",
+    "ds": "docker-compose -f ./run.yml stop",
+    "dc": "docker-compose -f ./run.yml clean",
+    "dt": "docker-compose -f ./test.yml up"
+  },
+  "devDependencies": {
+    "husky": "^0.14.3",
+    "jest": "^21.2.1",
+    "lint-staged": "^4.3.0",
+    "prettier": "^1.8.1"
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
   }
 }

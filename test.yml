@@ -12,7 +12,7 @@ services:
       - "6969:6969"
     links:
       - "db:mongo"
-    command: "yarn start"
+    command: "yarn test"
 
   db:
     image: mongo

@@ -1,8 +1,12 @@
+'use strict';
+
 const mongoose = require('mongoose');
 const TouchModel = require('../models/touch');
 
+mongoose.connect('mongodb://db/detouch');
+
 module.exports = {
-  getTouch: (touchId) => {
+  getTouch: touchId => {
     TouchModel.findById(touchId)
       .then(touch => {
         return { err: null, touch: touch };
@@ -22,7 +26,7 @@ module.exports = {
       });
   },
 
-  postTouch: (touch) => {
+  postTouch: touch => {
     TouchModel.create(touch)
       .then(touch => {
         return { err: null, touch: touch };
@@ -32,7 +36,7 @@ module.exports = {
       });
   },
 
-  upTouch: (touchId) => {
+  upTouch: touchId => {
     TouchModel.findByIdAndUpdate(touchId, { $inc: { tickles: 1 } })
       .then(touch => {
         return { touch: touch, err: null };
@@ -40,7 +44,6 @@ module.exports = {
       .catch(err => {
         return { touch: null, err: err };
       });
-
   },
 
   downTouch: () => {
@@ -52,5 +55,4 @@ module.exports = {
         return { err: err, touch: null };
       });
   }
-
 };
